@@ -13,7 +13,7 @@ class _SettingsFormState extends State<SettingsForm> {
 
   String _currentName;
   String _currentSugars;
-  String _currentStrength;
+  int _currentStrength;
 
   @override
   Widget build(BuildContext context) {
@@ -25,13 +25,13 @@ class _SettingsFormState extends State<SettingsForm> {
             'Update your brew settings',
             style: TextStyle(fontSize: 17.0),
           ),
-          SizedBox(height: 20.0),
+          // SizedBox(height: 20.0),
           TextFormField(
             decoration: textInputDecoration,
             validator: (val) => val.isEmpty ? 'Please enter a name' : null,
             onChanged: (val) => setState(() => _currentName = val),
           ),
-          SizedBox(height: 20.0),
+          // SizedBox(height: 20.0),
           // dropdown
           DropdownButtonFormField(
             decoration: textInputDecoration,
@@ -45,6 +45,16 @@ class _SettingsFormState extends State<SettingsForm> {
             onChanged: (val) => setState(() => _currentSugars = val),
           ),
           //slider
+          Slider(
+            value: (_currentStrength ?? 100).toDouble(),
+            activeColor: Colors.brown[_currentStrength ?? 100],
+            inactiveColor: Colors.brown[_currentStrength ?? 100],
+            min: 100.0,
+            max: 900.0,
+            divisions: 8,
+            onChanged: (val) => setState(() => _currentStrength = val.round()),
+          ),
+
           RaisedButton(
             color: Colors.pink[400],
             child: Text(
